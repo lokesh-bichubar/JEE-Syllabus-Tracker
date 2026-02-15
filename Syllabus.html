@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEE 2026 Progress Tracker</title>
+    <style>
+        :root {
+            --primary-blue: #007bff;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-white: #ffffff;
+            --text-gray: #b0b0b0;
+            --border: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-white);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 { color: var(--primary-blue); margin-bottom: 10px; }
+        p { color: var(--text-gray); margin-bottom: 30px; }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .subject-section {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+        }
+
+        .subject-title {
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            color: var(--text-gray);
+            font-weight: 400;
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .chapter-name { font-weight: 500; width: 40%; }
+        
+        .checkbox-cell { text-align: center; width: 20%; }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary-blue);
+        }
+
+        .reset-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 50px;
+        }
+
+        .reset-btn:hover { background: #cc0000; }
+
+        @media (max-width: 600px) {
+            .chapter-name { width: 100%; display: block; }
+            th, td { font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>JEE 2026 Preparation Tracker</h1>
+    <p>Your progress is automatically saved locally.</p>
+
+    <div class="container" id="tracker-container">
+        <div class="subject-section">
+            <div class="subject-title">Physics (Basics to Advanced)</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Chapter</th>
+                        <th class="checkbox-cell">Lecture</th>
+                        <th class="checkbox-cell">Notes</th>
+                        <th class="checkbox-cell">Mock Test</th>
+                    </tr>
+                </thead>
+                <tbody id="physics-body"></tbody>
+            </table>
+        </div>
+
+        <div class="subject-section">
+            <div class="subject-title">Chemistry (Basics to Advanced)</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Chapter</th>
+                        <th class="checkbox-cell">Lecture</th>
+                        <th class="checkbox-cell">Notes</th>
+                        <th class="checkbox-cell">Mock Test</th>
+                    </tr>
+                </thead>
+                <tbody id="chemistry-body"></tbody>
+            </table>
+        </div>
+
+        <div class="subject-section">
+            <div class="subject-title">Mathematics (Basics to Advanced)</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Chapter</th>
+                        <th class="checkbox-cell">Lecture</th>
+                        <th class="checkbox-cell">Notes</th>
+                        <th class="checkbox-cell">Mock Test</th>
+                    </tr>
+                </thead>
+                <tbody id="math-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <button class="reset-btn" onclick="resetProgress()">Reset All Progress</button>
+
+    <script>
+        const data = {
+            physics: [
+                "Units and Measurements", "Kinematics", "Laws of Motion", "Work, Energy and Power", 
+                "Rotational Motion", "Gravitation", "Properties of Solids/Liquids", 
+                "Thermodynamics", "Kinetic Theory of Gases", "Oscillations and Waves", 
+                "Electrostatics", "Current Electricity", "Magnetic Effects", "EMI & AC", 
+                "EM Waves", "Optics", "Modern Physics", "Electronic Devices"
+            ],
+            chemistry: [
+                "Some Basic Concepts (Mole)", "Atomic Structure", "Periodic Table", 
+                "Chemical Bonding", "Thermodynamics", "Equilibrium", "Redox & Electrochemistry", 
+                "Solutions", "Chemical Kinetics", "p-Block Elements", "d & f-Block Elements", 
+                "Coordination Compounds", "GOC (Basic Organic)", "Hydrocarbons", 
+                "Halogens/Oxygen/Nitrogen Compounds", "Biomolecules"
+            ],
+            math: [
+                "Sets, Relations, Functions", "Trigonometry", "Quadratic Equations", 
+                "Sequence and Series", "Permutations & Combinations", "Binomial Theorem", 
+                "Coordinate Geometry", "Vector Algebra", "3D Geometry", "Limits & Continuity", 
+                "Differentiation & Apps", "Integral Calculus", "Differential Equations", 
+                "Matrices & Determinants", "Statistics & Probability"
+            ]
+        };
+
+        function renderTracker() {
+            for (let subject in data) {
+                const tbody = document.getElementById(`${subject}-body`);
+                data[subject].forEach((chapter, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="chapter-name">${chapter}</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="${subject}-lec-${index}" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="${subject}-not-${index}" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="${subject}-tst-${index}" onchange="saveProgress()"></td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+            loadProgress();
+        }
+
+        function saveProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const progress = {};
+            checkboxes.forEach(cb => {
+                progress[cb.id] = cb.checked;
+            });
+            localStorage.setItem('jee2026Progress', JSON.stringify(progress));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('jee2026Progress');
+            if (saved) {
+                const progress = JSON.parse(saved);
+                for (let id in progress) {
+                    const el = document.getElementById(id);
+                    if (el) el.checked = progress[id];
+                }
+            }
+        }
+
+        function resetProgress() {
+            if (confirm("Are you sure you want to clear all progress?")) {
+                localStorage.removeItem('jee2026Progress');
+                location.reload();
+            }
+        }
+
+        window.onload = renderTracker;
+    </script>
+</body>
+</html>
