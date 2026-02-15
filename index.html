@@ -24,9 +24,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            cursor: pointer;
         }
 
-        /* Header & Clock Styling */
         .header-container {
             text-align: center;
             margin-bottom: 30px;
@@ -39,29 +39,28 @@
             font-weight: 800;
             letter-spacing: 1px;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
         .logo-text span { color: var(--primary-blue); }
 
         #clock-display {
             font-family: 'Courier New', Courier, monospace;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-gray);
             margin-bottom: 15px;
         }
 
-        /* Countdown Timer Styling */
         .countdown-container {
             background: var(--accent-glow);
             border: 1px solid var(--primary-blue);
             padding: 15px 25px;
             border-radius: 12px;
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .countdown-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--primary-blue);
@@ -73,19 +72,15 @@
             font-size: 1.8rem;
             font-weight: 700;
             font-family: 'Courier New', Courier, monospace;
-            color: var(--text-white);
         }
 
-        /* Container & Table Layout */
         .container { width: 100%; max-width: 900px; }
-
         .subject-section {
             background: var(--card-bg);
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 30px;
             border: 1px solid var(--border);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         .subject-title {
@@ -99,8 +94,7 @@
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; color: var(--text-gray); font-size: 0.75rem; text-transform: uppercase; padding: 10px; border-bottom: 1px solid var(--border); }
         td { padding: 12px 10px; border-bottom: 1px solid var(--border); }
-
-        .chapter-name { font-weight: 400; width: 45%; color: #e5e7eb; }
+        .chapter-name { width: 45%; color: #e5e7eb; }
         .checkbox-cell { text-align: center; width: 18%; }
 
         input[type="checkbox"] {
@@ -114,26 +108,23 @@
             background: transparent;
             color: #ff4b4b;
             border: 1px solid #ff4b4b;
-            padding: 10px 25px;
+            padding: 8px 20px;
             border-radius: 6px;
             cursor: pointer;
-            font-weight: 600;
             margin: 40px 0;
-            transition: 0.2s;
+            font-size: 0.75rem;
+            opacity: 0.6;
         }
-        .reset-btn:hover { background: #ff4b4b; color: white; }
+        .reset-btn:hover { opacity: 1; background: #ff4b4b; color: white; }
 
-        @media (max-width: 600px) {
-            #timer { font-size: 1.3rem; }
-            .logo-text { font-size: 1.2rem; }
-        }
+        @media (max-width: 600px) { #timer { font-size: 1.3rem; } }
     </style>
 </head>
-<body>
+<body onclick="initAudio()">
 
     <div class="header-container">
         <h1 class="logo-text">JEE 2026 <span>TRACKER</span></h1>
-        <div id="clock-display">Loading Date...</div>
+        <div id="clock-display">Loading...</div>
         
         <div class="countdown-container">
             <span class="countdown-label">JEE Main Session 2 Starts In:</span>
@@ -149,7 +140,6 @@
                 <tbody id="physics-body"></tbody>
             </table>
         </div>
-
         <div class="subject-section">
             <div class="subject-title">CHEMISTRY</div>
             <table>
@@ -157,7 +147,6 @@
                 <tbody id="chemistry-body"></tbody>
             </table>
         </div>
-
         <div class="subject-section">
             <div class="subject-title">MATHEMATICS</div>
             <table>
@@ -167,14 +156,44 @@
         </div>
     </div>
 
-    <button class="reset-btn" onclick="resetProgress()">Reset All Progress</button>
+    <button class="reset-btn" onclick="resetProgress()">Reset Progress</button>
 
     <script>
-        // Real-time Clock and Countdown
+        // Audio Engine - Reverted to first version sound
+        let audioCtx = null;
+        let audioInitialized = false;
+
+        function initAudio() {
+            if (audioInitialized) return;
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            audioInitialized = true;
+        }
+
+        function playTick() {
+            if (!audioInitialized || !audioCtx) return;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            // First version: Sine at 800Hz for a crisp metallic tick
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(800, audioCtx.currentTime); 
+            
+            // Subtle volume
+            gain.gain.setValueAtTime(0.04, audioCtx.currentTime); 
+            gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.1);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.1);
+        }
+
+        // Logic
         function updateTime() {
             const now = new Date();
-            
-            // 1. Digital Clock
             const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
             const dateStr = now.toLocaleDateString('en-GB', dateOptions);
             const h = String(now.getHours()).padStart(2, '0');
@@ -182,26 +201,21 @@
             const s = String(now.getSeconds()).padStart(2, '0');
             document.getElementById('clock-display').textContent = `${dateStr} (${h}:${m}:${s})`;
 
-            // 2. Countdown Timer
+            playTick();
+
             const targetDate = new Date("April 2, 2026 09:00:00").getTime();
-            const difference = targetDate - now.getTime();
-
-            if (difference > 0) {
-                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                document.getElementById('timer').textContent = 
-                    `${days}d ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
-            } else {
-                document.getElementById('timer').textContent = "Exam Session Started!";
+            const diff = targetDate - now.getTime();
+            if (diff > 0) {
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hh = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const mm = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const ss = Math.floor((diff % (1000 * 60)) / 1000);
+                document.getElementById('timer').textContent = `${d}d ${String(hh).padStart(2, '0')}h ${String(mm).padStart(2, '0')}m ${String(ss).padStart(2, '0')}s`;
             }
         }
         setInterval(updateTime, 1000);
         updateTime();
 
-        // Tracker Logic
         const data = {
             physics: ["Units & Measurements", "Kinematics", "Laws of Motion", "Work, Energy & Power", "Rotational Motion", "Gravitation", "Properties of Matter", "Thermodynamics", "Kinetic Theory", "Oscillations & Waves", "Electrostatics", "Current Electricity", "Magnetism", "EMI & AC", "EM Waves", "Optics", "Modern Physics", "Electronic Devices"],
             chemistry: ["Mole Concept", "Atomic Structure", "Periodic Table", "Chemical Bonding", "Thermodynamics", "Equilibrium", "Redox & Electrochemistry", "Solutions", "Chemical Kinetics", "p-Block Elements", "d & f-Block Elements", "Coordination Compounds", "General Organic Chem", "Hydrocarbons", "Organic Compounds (Hal/Oxy/Nit)", "Biomolecules"],
@@ -213,12 +227,7 @@
                 const tbody = document.getElementById(`${subject}-body`);
                 data[subject].forEach((chapter, index) => {
                     const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td class="chapter-name">${chapter}</td>
-                        <td class="checkbox-cell"><input type="checkbox" id="${subject}-lec-${index}" onchange="saveProgress()"></td>
-                        <td class="checkbox-cell"><input type="checkbox" id="${subject}-not-${index}" onchange="saveProgress()"></td>
-                        <td class="checkbox-cell"><input type="checkbox" id="${subject}-tst-${index}" onchange="saveProgress()"></td>
-                    `;
+                    row.innerHTML = `<td class="chapter-name">${chapter}</td><td class="checkbox-cell"><input type="checkbox" id="${subject}-lec-${index}" onchange="saveProgress()"></td><td class="checkbox-cell"><input type="checkbox" id="${subject}-not-${index}" onchange="saveProgress()"></td><td class="checkbox-cell"><input type="checkbox" id="${subject}-tst-${index}" onchange="saveProgress()"></td>`;
                     tbody.appendChild(row);
                 });
             }
@@ -249,7 +258,6 @@
                 location.reload();
             }
         }
-
         window.onload = renderTracker;
     </script>
 </body>
