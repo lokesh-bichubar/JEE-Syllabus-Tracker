@@ -6,16 +6,17 @@
     <title>JEE 2026 Progress Tracker</title>
     <style>
         :root {
-            --primary-blue: #007bff;
-            --dark-bg: #121212;
-            --card-bg: #1e1e1e;
+            --primary-blue: #00d2ff;
+            --dark-bg: #0f1114;
+            --card-bg: #1a1d23;
             --text-white: #ffffff;
-            --text-gray: #b0b0b0;
-            --border: #333;
+            --text-gray: #9ca3af;
+            --border: #2d343f;
+            --accent-glow: rgba(0, 210, 255, 0.15);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: var(--dark-bg);
             color: var(--text-white);
             margin: 0;
@@ -25,51 +26,82 @@
             align-items: center;
         }
 
-        h1 { color: var(--primary-blue); margin-bottom: 10px; }
-        p { color: var(--text-gray); margin-bottom: 30px; }
-
-        .container {
+        /* Header & Clock Styling */
+        .header-container {
+            text-align: center;
+            margin-bottom: 30px;
             width: 100%;
             max-width: 900px;
         }
 
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .logo-text span { color: var(--primary-blue); }
+
+        #clock-display {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 15px;
+        }
+
+        /* Countdown Timer Styling */
+        .countdown-container {
+            background: var(--accent-glow);
+            border: 1px solid var(--primary-blue);
+            padding: 15px 25px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .countdown-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        #timer {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--text-white);
+        }
+
+        /* Container & Table Layout */
+        .container { width: 100%; max-width: 900px; }
+
         .subject-section {
             background: var(--card-bg);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 20px;
             margin-bottom: 30px;
             border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         .subject-title {
-            font-size: 1.5rem;
-            border-bottom: 2px solid var(--primary-blue);
-            padding-bottom: 10px;
+            font-size: 1.2rem;
+            border-left: 4px solid var(--primary-blue);
+            padding-left: 15px;
             margin-bottom: 20px;
-            color: var(--primary-blue);
+            font-weight: 600;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; color: var(--text-gray); font-size: 0.75rem; text-transform: uppercase; padding: 10px; border-bottom: 1px solid var(--border); }
+        td { padding: 12px 10px; border-bottom: 1px solid var(--border); }
 
-        th {
-            text-align: left;
-            color: var(--text-gray);
-            font-weight: 400;
-            padding: 10px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        td {
-            padding: 12px 10px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .chapter-name { font-weight: 500; width: 40%; }
-        
-        .checkbox-cell { text-align: center; width: 20%; }
+        .chapter-name { font-weight: 400; width: 45%; color: #e5e7eb; }
+        .checkbox-cell { text-align: center; width: 18%; }
 
         input[type="checkbox"] {
             width: 18px;
@@ -79,71 +111,57 @@
         }
 
         .reset-btn {
-            background: #ff4444;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            background: transparent;
+            color: #ff4b4b;
+            border: 1px solid #ff4b4b;
+            padding: 10px 25px;
+            border-radius: 6px;
             cursor: pointer;
-            font-weight: bold;
-            margin-bottom: 50px;
+            font-weight: 600;
+            margin: 40px 0;
+            transition: 0.2s;
         }
-
-        .reset-btn:hover { background: #cc0000; }
+        .reset-btn:hover { background: #ff4b4b; color: white; }
 
         @media (max-width: 600px) {
-            .chapter-name { width: 100%; display: block; }
-            th, td { font-size: 12px; }
+            #timer { font-size: 1.3rem; }
+            .logo-text { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-    <h1>JEE 2026 Preparation Tracker</h1>
-    <p>Your progress is automatically saved locally.</p>
+    <div class="header-container">
+        <h1 class="logo-text">JEE 2026 <span>TRACKER</span></h1>
+        <div id="clock-display">Loading Date...</div>
+        
+        <div class="countdown-container">
+            <span class="countdown-label">JEE Main Session 2 Starts In:</span>
+            <div id="timer">00d 00h 00m 00s</div>
+        </div>
+    </div>
 
     <div class="container" id="tracker-container">
         <div class="subject-section">
-            <div class="subject-title">Physics (Padh le madharXhomd)</div>
+            <div class="subject-title">PHYSICS</div>
             <table>
-                <thead>
-                    <tr>
-                        <th>Chapter</th>
-                        <th class="checkbox-cell">Lecture</th>
-                        <th class="checkbox-cell">Short Notes</th>
-                        <th class="checkbox-cell">Mock Test</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Chapter</th><th class="checkbox-cell">Lec</th><th class="checkbox-cell">Note</th><th class="checkbox-cell">Test</th></tr></thead>
                 <tbody id="physics-body"></tbody>
             </table>
         </div>
 
         <div class="subject-section">
-            <div class="subject-title">Chemistry (Padh le madharXhomd)</div>
+            <div class="subject-title">CHEMISTRY</div>
             <table>
-                <thead>
-                    <tr>
-                        <th>Chapter</th>
-                        <th class="checkbox-cell">Lecture</th>
-                        <th class="checkbox-cell">Short Notes</th>
-                        <th class="checkbox-cell">Mock Test</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Chapter</th><th class="checkbox-cell">Lec</th><th class="checkbox-cell">Note</th><th class="checkbox-cell">Test</th></tr></thead>
                 <tbody id="chemistry-body"></tbody>
             </table>
         </div>
 
         <div class="subject-section">
-            <div class="subject-title">Mathematics (Padh le madharXhomd)</div>
+            <div class="subject-title">MATHEMATICS</div>
             <table>
-                <thead>
-                    <tr>
-                        <th>Chapter</th>
-                        <th class="checkbox-cell">Lecture</th>
-                        <th class="checkbox-cell">Short Notes</th>
-                        <th class="checkbox-cell">Mock Test</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Chapter</th><th class="checkbox-cell">Lec</th><th class="checkbox-cell">Note</th><th class="checkbox-cell">Test</th></tr></thead>
                 <tbody id="math-body"></tbody>
             </table>
         </div>
@@ -152,28 +170,42 @@
     <button class="reset-btn" onclick="resetProgress()">Reset All Progress</button>
 
     <script>
+        // Real-time Clock and Countdown
+        function updateTime() {
+            const now = new Date();
+            
+            // 1. Digital Clock
+            const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            const dateStr = now.toLocaleDateString('en-GB', dateOptions);
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock-display').textContent = `${dateStr} (${h}:${m}:${s})`;
+
+            // 2. Countdown Timer
+            const targetDate = new Date("April 2, 2026 09:00:00").getTime();
+            const difference = targetDate - now.getTime();
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('timer').textContent = 
+                    `${days}d ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
+            } else {
+                document.getElementById('timer').textContent = "Exam Session Started!";
+            }
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Tracker Logic
         const data = {
-            physics: [
-                "Units and Measurements", "Kinematics", "Laws of Motion", "Work, Energy and Power", 
-                "Rotational Motion", "Gravitation", "Properties of Solids/Liquids", 
-                "Thermodynamics", "Kinetic Theory of Gases", "Oscillations and Waves", 
-                "Electrostatics", "Current Electricity", "Magnetic Effects", "EMI & AC", 
-                "EM Waves", "Optics", "Modern Physics", "Electronic Devices"
-            ],
-            chemistry: [
-                "Some Basic Concepts (Mole)", "Atomic Structure", "Periodic Table", 
-                "Chemical Bonding", "Thermodynamics", "Equilibrium", "Redox & Electrochemistry", 
-                "Solutions", "Chemical Kinetics", "p-Block Elements", "d & f-Block Elements", 
-                "Coordination Compounds", "GOC (Basic Organic)", "Hydrocarbons", 
-                "Halogens/Oxygen/Nitrogen Compounds", "Biomolecules"
-            ],
-            math: [
-                "Sets, Relations, Functions", "Trigonometry", "Quadratic Equations", 
-                "Sequence and Series", "Permutations & Combinations", "Binomial Theorem", 
-                "Coordinate Geometry", "Vector Algebra", "3D Geometry", "Limits & Continuity", 
-                "Differentiation & Apps", "Integral Calculus", "Differential Equations", 
-                "Matrices & Determinants", "Statistics & Probability"
-            ]
+            physics: ["Units & Measurements", "Kinematics", "Laws of Motion", "Work, Energy & Power", "Rotational Motion", "Gravitation", "Properties of Matter", "Thermodynamics", "Kinetic Theory", "Oscillations & Waves", "Electrostatics", "Current Electricity", "Magnetism", "EMI & AC", "EM Waves", "Optics", "Modern Physics", "Electronic Devices"],
+            chemistry: ["Mole Concept", "Atomic Structure", "Periodic Table", "Chemical Bonding", "Thermodynamics", "Equilibrium", "Redox & Electrochemistry", "Solutions", "Chemical Kinetics", "p-Block Elements", "d & f-Block Elements", "Coordination Compounds", "General Organic Chem", "Hydrocarbons", "Organic Compounds (Hal/Oxy/Nit)", "Biomolecules"],
+            math: ["Sets, Relations & Functions", "Trigonometry", "Quadratic Equations", "Sequence & Series", "Permutations & Combinations", "Binomial Theorem", "Coordinate Geometry", "Vector Algebra", "3D Geometry", "Limits & Continuity", "Differentiation", "Integral Calculus", "Differential Equations", "Matrices & Determinants", "Statistics & Probability"]
         };
 
         function renderTracker() {
@@ -196,9 +228,7 @@
         function saveProgress() {
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             const progress = {};
-            checkboxes.forEach(cb => {
-                progress[cb.id] = cb.checked;
-            });
+            checkboxes.forEach(cb => { progress[cb.id] = cb.checked; });
             localStorage.setItem('jee2026Progress', JSON.stringify(progress));
         }
 
@@ -214,7 +244,7 @@
         }
 
         function resetProgress() {
-            if (confirm("Are you sure you want to clear all progress?")) {
+            if (confirm("Reset all progress?")) {
                 localStorage.removeItem('jee2026Progress');
                 location.reload();
             }
