@@ -62,6 +62,13 @@
         }
         #count { color: var(--primary-blue); font-weight: bold; }
 
+        .timers-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
         .countdown-container {
             background: var(--accent-glow);
             border: 1px solid var(--primary-blue);
@@ -70,6 +77,7 @@
             display: inline-block;
             margin-bottom: 15px;
             box-shadow: 0 0 15px rgba(0, 210, 255, 0.1);
+            min-width: 200px; /* Ensures consistent size */
         }
 
         .countdown-label {
@@ -81,7 +89,7 @@
             display: block;
         }
 
-        #timer {
+        .timer-display {
             font-size: 1.8rem;
             font-weight: 700;
             font-family: 'Courier New', Courier, monospace;
@@ -141,7 +149,7 @@
         .reset-btn:hover { opacity: 1; background: #ff4b4b; color: white; box-shadow: 0 0 10px rgba(255, 75, 75, 0.3); }
 
         @media (max-width: 600px) { 
-            #timer { font-size: 1.3rem; } 
+            .timer-display { font-size: 1.3rem; } 
             .chapter-name { font-size: 0.85rem; }
         }
     </style>
@@ -152,11 +160,18 @@
         <h1 class="logo-text">JEE 2026 <span>TRACKER</span></h1>
         <div id="clock-display">Loading...</div>
         
-        <div id="visitor-count">No. of Times you refresh this Lokesh ki bakchodi: <span id="count">Loading...</span></div>
+        <div id="visitor-count">No. of Times you refresh this Lokesh ki bakchodi: <span id="count">0</span></div>
         
-        <div class="countdown-container">
-            <span class="countdown-label">JEE Main Session 2 Starts In:</span>
-            <div id="timer">00d 00h 00m 00s</div>
+        <div class="timers-wrapper">
+            <div class="countdown-container">
+                <span class="countdown-label">JEE Main Session 2 Starts In:</span>
+                <div id="timer" class="timer-display">Loading...</div>
+            </div>
+
+            <div class="countdown-container">
+                <span class="countdown-label">JEE Advanced Starts In:</span>
+                <div id="timer-adv" class="timer-display">Loading...</div>
+            </div>
         </div>
     </div>
 
@@ -226,37 +241,39 @@
 
             playTick();
 
-            // JEE 2026 Target: April 2, 2026 (Estimate)
-            const targetDate = new Date("April 2, 2026 09:00:00").getTime();
-            const diff = targetDate - now.getTime();
-            
-            if (diff > 0) {
-                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hh = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const mm = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const ss = Math.floor((diff % (1000 * 60)) / 1000);
-                document.getElementById('timer').textContent = `${d}d ${String(hh).padStart(2, '0')}h ${String(mm).padStart(2, '0')}m ${String(ss).padStart(2, '0')}s`;
-            } else {
-                document.getElementById('timer').textContent = "EXAM STARTED";
+            // Function to calculate and update specific timer
+            function updateSpecificTimer(targetDateStr, elementId, label) {
+                const targetDate = new Date(targetDateStr).getTime();
+                const diff = targetDate - now.getTime();
+                
+                if (diff > 0) {
+                    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hh = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const mm = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const ss = Math.floor((diff % (1000 * 60)) / 1000);
+                    document.getElementById(elementId).textContent = `${d}d ${String(hh).padStart(2, '0')}h ${String(mm).padStart(2, '0')}m ${String(ss).padStart(2, '0')}s`;
+                } else {
+                    document.getElementById(elementId).textContent = label;
+                }
             }
+
+            // JEE Main Session 2 Target: April 2, 2026 (Estimate)
+            updateSpecificTimer("April 2, 2026 09:00:00", "timer", "MAINS STARTED");
+
+            // JEE Advanced Target: May 17, 2026
+            updateSpecificTimer("May 17, 2026 09:00:00", "timer-adv", "ADVANCED STARTED");
         }
         setInterval(updateTime, 1000);
 
         // --- Visitor Counter Logic (Robust Local Version) ---
         function updateVisitorCount() {
-            // We use localStorage to simulate a persistent counter for your personal use.
-            // This is more reliable than free APIs which frequently go offline or get blocked.
             let currentCount = localStorage.getItem('jeeTracker_visits');
-            
             if (!currentCount) {
-                currentCount = 1; // Start at 1
+                currentCount = 1; 
             } else {
-                currentCount = parseInt(currentCount) + 1; // Increment
+                currentCount = parseInt(currentCount) + 1; 
             }
-            
             localStorage.setItem('jeeTracker_visits', currentCount);
-            
-            // Format with commas (e.g., 1,024)
             document.getElementById('count').textContent = currentCount.toLocaleString();
         }
 
@@ -271,11 +288,10 @@
         function renderTracker() {
             for (let subject in data) {
                 const tbody = document.getElementById(`${subject}-body`);
-                tbody.innerHTML = ''; // Clear existing
+                tbody.innerHTML = ''; 
                 data[subject].forEach((chapter, index) => {
                     const row = document.createElement('tr');
                     
-                    // Create unique IDs for checkboxes
                     const lecId = `${subject}-lec-${index}`;
                     const notId = `${subject}-not-${index}`;
                     const tstId = `${subject}-tst-${index}`;
@@ -313,8 +329,6 @@
         function resetProgress() {
             if (confirm("Are you sure you want to reset all progress? This cannot be undone.")) {
                 localStorage.removeItem('jee2026Progress');
-                // Optional: also reset visit count
-                // localStorage.removeItem('jeeTracker_visits'); 
                 location.reload();
             }
         }
