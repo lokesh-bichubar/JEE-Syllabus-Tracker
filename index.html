@@ -148,9 +148,48 @@
         }
         .reset-btn:hover { opacity: 1; background: #ff4b4b; color: white; box-shadow: 0 0 10px rgba(255, 75, 75, 0.3); }
 
+        /* --- NEW STYLES FOR PERCENTAGE TRACKER --- */
+        .progress-stats-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .stat-item { flex: 1; }
+        .stat-val {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+        .stat-desc {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+        .main-progress-bar-bg {
+            background: #2d343f;
+            height: 8px;
+            width: 100%;
+            border-radius: 4px;
+            margin-top: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+        }
+        .main-progress-bar-fill {
+            height: 100%;
+            background: var(--primary-blue);
+            width: 0%;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px var(--primary-blue);
+        }
+
         @media (max-width: 600px) { 
             .timer-display { font-size: 1.3rem; } 
             .chapter-name { font-size: 0.85rem; }
+            .stat-val { font-size: 1.4rem; }
         }
     </style>
 </head>
@@ -158,7 +197,7 @@
 
     <div class="header-container">
         <h1 class="logo-text">JEE 2026 <span>TRACKER</span></h1>
-        <div id="clock-display">Loading...</div>
+        <div id="clock-display"></div>
         
         <div id="visitor-count">No. of Times you refresh this Lokesh ki bakchodi: <span id="count">0</span></div>
         
@@ -175,12 +214,34 @@
         </div>
     </div>
 
+    <div class="container" id="overall-progress-container">
+        <div class="subject-section" style="padding-bottom: 25px;">
+            <div class="subject-title" style="border: none; padding-left: 0; margin-bottom: 10px; text-align: center;">OVERALL SYLLABUS STATUS</div>
+            
+            <div class="progress-stats-container">
+                <div class="stat-item">
+                    <div class="stat-val" id="percent-covered">0.0%</div>
+                    <div class="stat-desc">Syllabus Covered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-val" id="percent-left" style="color: #ff4b4b;">100.0%</div>
+                    <div class="stat-desc">Syllabus Left</div>
+                </div>
+            </div>
+
+            <div class="main-progress-bar-bg">
+                <div class="main-progress-bar-fill" id="main-progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="container" id="tracker-container">
         <div class="subject-section">
             <div class="subject-title">PHYSICS</div>
             <table>
                 <thead><tr><th>Chapter</th><th class="checkbox-cell">Lec</th><th class="checkbox-cell">Note</th><th class="checkbox-cell">Test</th></tr></thead>
-                <tbody id="physics-body"></tbody>
+                <tbody id="physics-body">
+                    </tbody>
             </table>
         </div>
 
@@ -188,7 +249,8 @@
             <div class="subject-title">CHEMISTRY</div>
             <table>
                 <thead><tr><th>Chapter</th><th class="checkbox-cell">Lec</th><th class="checkbox-cell">Note</th><th class="checkbox-cell">Test</th></tr></thead>
-                <tbody id="chemistry-body"></tbody>
+                <tbody id="chemistry-body">
+                     </tbody>
             </table>
         </div>
 
@@ -196,7 +258,8 @@
             <div class="subject-title">MATHEMATICS</div>
             <table>
                 <thead><tr><th>Chapter</th><th class="checkbox-cell">Lec</th><th class="checkbox-cell">Note</th><th class="checkbox-cell">Test</th></tr></thead>
-                <tbody id="math-body"></tbody>
+                <tbody id="math-body">
+                     </tbody>
             </table>
         </div>
     </div>
@@ -284,7 +347,7 @@
             math: ["Sets, Relations & Functions", "Trigonometry", "Quadratic Equations", "Sequence & Series", "Permutations & Combinations", "Binomial Theorem", "Coordinate Geometry", "Vector Algebra", "3D Geometry", "Limits & Continuity", "Differentiation", "Integral Calculus", "Differential Equations", "Matrices & Determinants", "Statistics & Probability"]
         };
 
-        // --- Render & Save Logic ---
+        // --- Render, Save & Calculate Logic ---
         function renderTracker() {
             for (let subject in data) {
                 const tbody = document.getElementById(`${subject}-body`);
@@ -308,11 +371,32 @@
             loadProgress();
         }
 
+        function calculatePercentage() {
+            const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+            const total = allCheckboxes.length;
+            let checkedCount = 0;
+            
+            allCheckboxes.forEach(cb => {
+                if(cb.checked) checkedCount++;
+            });
+
+            const percentCovered = total === 0 ? 0 : (checkedCount / total) * 100;
+            const percentLeft = 100 - percentCovered;
+
+            // Update DOM
+            document.getElementById('percent-covered').textContent = percentCovered.toFixed(1) + '%';
+            document.getElementById('percent-left').textContent = percentLeft.toFixed(1) + '%';
+            document.getElementById('main-progress-fill').style.width = percentCovered + '%';
+        }
+
         function saveProgress() {
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             const progress = {};
             checkboxes.forEach(cb => { progress[cb.id] = cb.checked; });
             localStorage.setItem('jee2026Progress', JSON.stringify(progress));
+            
+            // Recalculate percentage whenever we save
+            calculatePercentage();
         }
 
         function loadProgress() {
@@ -324,6 +408,8 @@
                     if (el) el.checked = progress[id];
                 }
             }
+            // Recalculate percentage after loading
+            calculatePercentage();
         }
 
         function resetProgress() {
