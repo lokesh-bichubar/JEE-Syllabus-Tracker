@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JEE 2026 Progress Tracker</title>
@@ -197,21 +197,25 @@
 
     <div class="header-container">
         <h1 class="logo-text">JEE 2026 <span>TRACKER</span></h1>
-        <div id="clock-display"></div>
+        <div id="clock-display">Tuesday, 17 February 2026 (03:15:30)</div>
         
-        <div id="visitor-count">No. of Times you refresh this Lokesh ki bakchodi: <span id="count">0</span></div>
+        <div id="visitor-count">No. of Times you refresh this Lokesh ki bakchodi: <span id="count">24</span></div>
         
         <div class="timers-wrapper">
             <div class="countdown-container">
                 <span class="countdown-label">JEE Main Session 2 Starts In:</span>
-                <div id="timer" class="timer-display">Loading...</div>
+                <div id="timer" class="timer-display">44d 05h 44m 29s</div>
             </div>
 
             <div class="countdown-container">
                 <span class="countdown-label">JEE Advanced Starts In:</span>
-                <div id="timer-adv" class="timer-display">Loading...</div>
+                <div id="timer-adv" class="timer-display">89d 05h 44m 29s</div>
             </div>
         </div>
+
+        <a href="Detailed Syllabus.html" target="_blank" class="syllabus-btn">
+            📄 View Detailed Syllabus
+        </a>
     </div>
 
     <div class="container" id="overall-progress-container">
@@ -220,17 +224,17 @@
             
             <div class="progress-stats-container">
                 <div class="stat-item">
-                    <div class="stat-val" id="percent-covered">0.0%</div>
+                    <div class="stat-val" id="percent-covered">0.7%</div>
                     <div class="stat-desc">Syllabus Covered</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-val" id="percent-left" style="color: #ff4b4b;">100.0%</div>
+                    <div class="stat-val" id="percent-left" style="color: #ff4b4b;">99.3%</div>
                     <div class="stat-desc">Syllabus Left</div>
                 </div>
             </div>
 
             <div class="main-progress-bar-bg">
-                <div class="main-progress-bar-fill" id="main-progress-fill"></div>
+                <div class="main-progress-bar-fill" id="main-progress-fill" style="width: 0.680272%;"></div>
             </div>
         </div>
     </div>
@@ -240,8 +244,97 @@
             <div class="subject-title">PHYSICS</div>
             <table>
                 <thead><tr><th>Chapter</th><th class="checkbox-cell">Lec</th><th class="checkbox-cell">Note</th><th class="checkbox-cell">Test</th></tr></thead>
-                <tbody id="physics-body">
-                    </tbody>
+                <tbody id="physics-body"><tr>
+                        <td class="chapter-name">Units &amp; Measurements</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-0" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-0" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-0" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Kinematics</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-1" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-1" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-1" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Laws of Motion</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-2" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-2" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-2" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Work, Energy &amp; Power</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-3" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-3" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-3" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Rotational Motion</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-4" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-4" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-4" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Gravitation</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-5" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-5" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-5" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Properties of Matter</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-6" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-6" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-6" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Thermodynamics</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-7" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-7" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-7" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Kinetic Theory</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-8" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-8" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-8" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Oscillations &amp; Waves</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-9" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-9" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-9" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Electrostatics</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-10" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-10" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-10" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Current Electricity</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-11" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-11" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-11" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Magnetism</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-12" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-12" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-12" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">EMI &amp; AC</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-13" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-13" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-13" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">EM Waves</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-14" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-14" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-14" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Optics</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-15" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-15" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-15" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Modern Physics</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-16" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-16" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-16" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Electronic Devices</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-lec-17" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-not-17" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="physics-tst-17" onchange="saveProgress()"></td>
+                    </tr></tbody>
             </table>
         </div>
 
@@ -249,8 +342,87 @@
             <div class="subject-title">CHEMISTRY</div>
             <table>
                 <thead><tr><th>Chapter</th><th class="checkbox-cell">Lec</th><th class="checkbox-cell">Note</th><th class="checkbox-cell">Test</th></tr></thead>
-                <tbody id="chemistry-body">
-                     </tbody>
+                <tbody id="chemistry-body"><tr>
+                        <td class="chapter-name">Mole Concept</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-lec-0" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-not-0" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-tst-0" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Atomic Structure</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-lec-1" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-not-1" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-tst-1" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Periodic Table</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-lec-2" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-not-2" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-tst-2" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Chemical Bonding</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-lec-3" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-not-3" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-tst-3" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Thermodynamics</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-lec-4" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-not-4" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-tst-4" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Equilibrium</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-lec-5" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-not-5" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-tst-5" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Redox &amp; Electrochemistry</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-lec-6" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-not-6" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-tst-6" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Solutions</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-lec-7" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-not-7" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-tst-7" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Chemical Kinetics</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-lec-8" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-not-8" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-tst-8" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">p-Block Elements</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-lec-9" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-not-9" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-tst-9" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">d &amp; f-Block Elements</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-lec-10" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-not-10" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-tst-10" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Coordination Compounds</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-lec-11" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-not-11" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-tst-11" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">General Organic Chem</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-lec-12" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-not-12" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-tst-12" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Hydrocarbons</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-lec-13" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-not-13" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-tst-13" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Organic Compounds (Hal/Oxy/Nit)</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-lec-14" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-not-14" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-tst-14" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Biomolecules</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-lec-15" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-not-15" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="chemistry-tst-15" onchange="saveProgress()"></td>
+                    </tr></tbody>
             </table>
         </div>
 
@@ -258,8 +430,82 @@
             <div class="subject-title">MATHEMATICS</div>
             <table>
                 <thead><tr><th>Chapter</th><th class="checkbox-cell">Lec</th><th class="checkbox-cell">Note</th><th class="checkbox-cell">Test</th></tr></thead>
-                <tbody id="math-body">
-                     </tbody>
+                <tbody id="math-body"><tr>
+                        <td class="chapter-name">Sets, Relations &amp; Functions</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-lec-0" onchange="saveProgress()" checked="checked"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-not-0" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-tst-0" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Trigonometry</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-lec-1" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-not-1" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-tst-1" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Quadratic Equations</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-lec-2" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-not-2" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-tst-2" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Sequence &amp; Series</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-lec-3" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-not-3" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-tst-3" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Permutations &amp; Combinations</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-lec-4" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-not-4" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-tst-4" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Binomial Theorem</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-lec-5" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-not-5" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-tst-5" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Coordinate Geometry</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-lec-6" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-not-6" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-tst-6" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Vector Algebra</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-lec-7" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-not-7" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-tst-7" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">3D Geometry</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-lec-8" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-not-8" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-tst-8" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Limits &amp; Continuity</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-lec-9" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-not-9" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-tst-9" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Differentiation</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-lec-10" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-not-10" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-tst-10" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Integral Calculus</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-lec-11" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-not-11" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-tst-11" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Differential Equations</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-lec-12" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-not-12" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-tst-12" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Matrices &amp; Determinants</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-lec-13" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-not-13" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-tst-13" onchange="saveProgress()"></td>
+                    </tr><tr>
+                        <td class="chapter-name">Statistics &amp; Probability</td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-lec-14" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-not-14" onchange="saveProgress()"></td>
+                        <td class="checkbox-cell"><input type="checkbox" id="math-tst-14" onchange="saveProgress()"></td>
+                    </tr></tbody>
             </table>
         </div>
     </div>
@@ -426,5 +672,6 @@
             updateVisitorCount();
         };
     </script>
-</body>
-</html>
+
+
+</body></html>
