@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEE 2026 Syllabus Overview</title>
+    <style>
+        :root {
+            --primary-blue: #00d2ff;
+            --dark-bg: #0f1114;
+            --card-bg: #1a1d23;
+            --text-white: #ffffff;
+            --text-gray: #9ca3af;
+            --border: #2d343f;
+            --accent-glow: rgba(0, 210, 255, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-white);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header-container {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .logo-text span { color: var(--primary-blue); }
+
+        .sub-header {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .container { width: 100%; max-width: 900px; }
+        
+        .subject-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .subject-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-color: #3f4754;
+        }
+
+        .subject-title {
+            font-size: 1.4rem;
+            border-left: 4px solid var(--primary-blue);
+            padding-left: 15px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: var(--text-white);
+            text-transform: uppercase;
+        }
+
+        .subject-intro {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            font-style: italic;
+            padding-left: 19px;
+        }
+
+        .phase-container {
+            margin-bottom: 25px;
+        }
+
+        .phase-header {
+            font-size: 1rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .unit-row {
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .unit-row:last-child { border-bottom: none; }
+
+        .unit-name {
+            color: #e5e7eb;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .unit-desc {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 600px) { 
+            .logo-text { font-size: 1.5rem; }
+            .subject-title { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <h1 class="logo-text">JEE 2026 <span>SYLLABUS</span></h1>
+        <div class="sub-header">Comprehensive breakdown of Physics, Mathematics, and Chemistry curriculum phases.</div>
+    </div>
+
+    <div class="container">
+        
+        <div class="subject-section">
+            <div class="subject-title">⚛️ PHYSICS</div>
+            <div class="subject-intro">Physics requires a strict sequence because later topics (like Electrodynamics) rely heavily on earlier mechanics and calculus concepts.</div>
+
+            <div class="phase-container">
+                <div class="phase-header">🟦 Phase I: Mechanics & General Physics</div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 1: Units and Measurements</span>
+                    <span class="unit-desc">Foundation for all physical quantities, dimensions, and error analysis.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 2: Kinematics</span>
+                    <span class="unit-desc">Motion in straight lines, graphs, projectile motion, and relative velocity.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 3: Laws of Motion</span>
+                    <span class="unit-desc">Newton's laws, friction, and dynamics of circular motion.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 4: Work, Energy and Power</span>
+                    <span class="unit-desc">Work-energy theorem, conservation laws, and collisions.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 5: Rotational Motion</span>
+                    <span class="unit-desc">Center of mass, torque, moment of inertia, and rolling motion.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 6: Gravitation</span>
+                    <span class="unit-desc">Universal law, Kepler's laws, and satellite motion.</span>
+                </div>
+            </div>
+
+            <div class="phase-container">
+                <div class="phase-header">🟧 Phase II: Properties of Matter & Heat</div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 7: Properties of Solids and Liquids</span>
+                    <span class="unit-desc">Elasticity (Hooke’s Law), Viscosity (Bernoulli’s principle), and Surface Tension.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 8: Thermodynamics</span>
+                    <span class="unit-desc">Laws of thermodynamics, internal energy, and Carnot engine concepts.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 9: Kinetic Theory of Gases</span>
+                    <span class="unit-desc">Gas laws, degrees of freedom, and RMS speed.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 10: Oscillations and Waves</span>
+                    <span class="unit-desc">Simple Harmonic Motion (SHM), sound waves, and Doppler effect/beats.</span>
+                </div>
+            </div>
+
+            <div class="phase-container">
+                <div class="phase-header">🟪 Phase III: Electrodynamics</div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 11: Electrostatics</span>
+                    <span class="unit-desc">Coulomb's law, electric field/potential, flux (Gauss's law), and capacitors.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 12: Current Electricity</span>
+                    <span class="unit-desc">Ohm's law, Kirchhoff's laws, and electrical instruments.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 13: Magnetic Effects of Current and Magnetism</span>
+                    <span class="unit-desc">Biot-Savart law, Ampere's law, and magnetic properties of materials.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 14: EMI and AC</span>
+                    <span class="unit-desc">Faraday’s/Lenz’s law, Inductance, and LCR circuits.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 15: Electromagnetic Waves</span>
+                    <span class="unit-desc">EM spectrum and displacement current.</span>
+                </div>
+            </div>
+
+            <div class="phase-container">
+                <div class="phase-header">🟥 Phase IV: Optics & Modern Physics</div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 16: Optics</span>
+                    <span class="unit-desc">Ray optics (mirrors/lenses) and Wave optics (Interference/Diffraction).</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 17: Dual Nature of Matter and Radiation</span>
+                    <span class="unit-desc">Photoelectric effect and de-Broglie waves.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 18: Atoms and Nuclei</span>
+                    <span class="unit-desc">Bohr model, binding energy, fission, and fusion.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 19: Electronic Devices</span>
+                    <span class="unit-desc">Semiconductors, diodes (Zener/LED), and Logic Gates.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 20: Experimental Skills</span>
+                    <span class="unit-desc">Practical experiments (Vernier calipers, Screw gauge, etc.).</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="subject-section">
+            <div class="subject-title">📐 MATHEMATICS</div>
+            <div class="subject-intro">Math is split into Algebra/Trigonometry (Tools), Coordinate Geometry (Visual), and Calculus (Analysis).</div>
+
+            <div class="phase-container">
+                <div class="phase-header">🟩 Phase I: Algebra & Trigonometry</div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 1: Sets, Relations and Functions</span>
+                    <span class="unit-desc">Basic set theory and function types (one-one, onto).</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 2: Complex Numbers and Quadratic Equations</span>
+                    <span class="unit-desc">Quadratic roots and complex plane (Argand diagram).</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 4: Permutations and Combinations</span>
+                    <span class="unit-desc">Counting principles, P(n,r), and C(n,r).</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 5: Binomial Theorem</span>
+                    <span class="unit-desc">General term and applications.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 6: Sequence and Series</span>
+                    <span class="unit-desc">Arithmetic (A.P.) and Geometric (G.P.) progressions.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 14: Trigonometry</span>
+                    <span class="unit-desc">Identities and Inverse Trigonometric Functions.</span>
+                </div>
+            </div>
+
+            <div class="phase-container">
+                <div class="phase-header">🟡 Phase II: Coordinate Geometry & Vectors</div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 10: Co-ordinate Geometry</span>
+                    <span class="unit-desc">Straight lines, circles, and Conic Sections (Parabola, Ellipse, Hyperbola).</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 11: Three Dimensional Geometry</span>
+                    <span class="unit-desc">Distance formula, direction cosines, and lines in space.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 12: Vector Algebra</span>
+                    <span class="unit-desc">Dot/Cross products and components.</span>
+                </div>
+            </div>
+
+            <div class="phase-container">
+                <div class="phase-header">🔴 Phase III: Calculus</div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 7: Limit, Continuity and Differentiability</span>
+                    <span class="unit-desc">Limits, continuity, rules of differentiation, and Applications (Tangents, Maxima/Minima, Rate of change).</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 8: Integral Calculus</span>
+                    <span class="unit-desc">Indefinite integration, Definite integrals, and Area under curves.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 9: Differential Equations</span>
+                    <span class="unit-desc">Variable separation and Linear Differential Equations.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="subject-section">
+            <div class="subject-title">🧪 CHEMISTRY</div>
+            <div class="subject-intro">Chemistry is best learned by mastering Physical principles first, then Inorganic trends, and finally Organic mechanisms.</div>
+
+            <div class="phase-container">
+                <div class="phase-header">🔵 Phase I: Physical Chemistry</div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 1: Basic Concepts</span>
+                    <span class="unit-desc">Mole concept, stoichiometry, and concentration terms.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 2: Atomic Structure</span>
+                    <span class="unit-desc">Quantum mechanical model and electronic configuration.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 3: Chemical Bonding</span>
+                    <span class="unit-desc">VSEPR theory, Hybridization, and MO Theory.</span>
+                </div>
+            </div>
+
+            <div class="phase-container">
+                <div class="phase-header">🟠 Phase II: Thermodynamics & Equilibrium</div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 4: Chemical Thermodynamics</span>
+                    <span class="unit-desc">Laws, Enthalpy, Entropy, and Gibbs Energy.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 6: Equilibrium</span>
+                    <span class="unit-desc">Chemical and Ionic equilibrium (pH, buffers).</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 7: Redox & Electrochemistry</span>
+                    <span class="unit-desc">Oxidation numbers, Nernst equation, and Cells.</span>
+                </div>
+                <div class="unit-row">
+                    <span class="unit-name">Unit 8: Chemical Kinetics</span>
+                    <span class="unit-desc">Rate laws, order of reaction, and Arrhenius equation.</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
